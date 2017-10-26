@@ -104,6 +104,7 @@ func NewUnsignedTransaction(outputs []*wire.TxOut, relayFeePerKb luxutil.Amount,
 
 		unsignedTransaction := &wire.MsgTx{
 			Version:  wire.TxVersion,
+			Time:     0,
 			TxIn:     inputs,
 			TxOut:    outputs,
 			LockTime: 0,

@@ -71,6 +71,7 @@ func createWithdrawalTx(t *testing.T, dbtx walletdb.ReadWriteTx, pool *Pool, inp
 func createMsgTx(pkScript []byte, amts []int64) *wire.MsgTx {
 	msgtx := &wire.MsgTx{
 		Version: 1,
+		Time: 0,
 		TxIn: []*wire.TxIn{
 			{
 				PreviousOutPoint: wire.OutPoint{
