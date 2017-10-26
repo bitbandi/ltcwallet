@@ -13,9 +13,9 @@ import (
 	"runtime"
 	"sync"
 
-	"github.com/roasbeef/btcwallet/chain"
-	"github.com/roasbeef/btcwallet/rpc/legacyrpc"
-	"github.com/roasbeef/btcwallet/wallet"
+	"github.com/bitbandi/luxwallet/chain"
+	"github.com/bitbandi/luxwallet/rpc/legacyrpc"
+	"github.com/bitbandi/luxwallet/wallet"
 )
 
 var (

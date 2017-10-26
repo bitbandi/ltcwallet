@@ -7,14 +7,14 @@
 package helpers
 
 import (
-	"github.com/roasbeef/btcd/wire"
-	"github.com/roasbeef/btcutil"
+	"github.com/bitbandi/luxd/wire"
+	"github.com/bitbandi/luxutil"
 )
 
 // SumOutputValues sums up the list of TxOuts and returns an Amount.
-func SumOutputValues(outputs []*wire.TxOut) (totalOutput btcutil.Amount) {
+func SumOutputValues(outputs []*wire.TxOut) (totalOutput luxutil.Amount) {
 	for _, txOut := range outputs {
-		totalOutput += btcutil.Amount(txOut.Value)
+		totalOutput += luxutil.Amount(txOut.Value)
 	}
 	return totalOutput
 }

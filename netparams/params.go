@@ -4,7 +4,7 @@
 
 package netparams
 
-import "github.com/roasbeef/btcd/chaincfg"
+import "github.com/bitbandi/luxd/chaincfg"
 
 // Params is used to group parameters for various networks such as the main
 // network and test networks.

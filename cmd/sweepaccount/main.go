@@ -13,20 +13,20 @@ import (
 	"golang.org/x/crypto/ssh/terminal"
 
 	"github.com/jessevdk/go-flags"
-	"github.com/roasbeef/btcd/btcjson"
-	"github.com/roasbeef/btcd/chaincfg/chainhash"
-	"github.com/roasbeef/btcd/txscript"
-	"github.com/roasbeef/btcd/wire"
-	"github.com/roasbeef/btcrpcclient"
-	"github.com/roasbeef/btcutil"
-	"github.com/roasbeef/btcwallet/internal/cfgutil"
-	"github.com/roasbeef/btcwallet/netparams"
-	"github.com/roasbeef/btcwallet/wallet/txauthor"
-	"github.com/roasbeef/btcwallet/wallet/txrules"
+	"github.com/bitbandi/luxd/btcjson"
+	"github.com/bitbandi/luxd/chaincfg/chainhash"
+	"github.com/bitbandi/luxd/txscript"
+	"github.com/bitbandi/luxd/wire"
+	"github.com/bitbandi/luxrpcclient"
+	"github.com/bitbandi/luxutil"
+	"github.com/bitbandi/luxwallet/internal/cfgutil"
+	"github.com/bitbandi/luxwallet/netparams"
+	"github.com/bitbandi/luxwallet/wallet/txauthor"
+	"github.com/bitbandi/luxwallet/wallet/txrules"
 )
 
 var (
-	walletDataDirectory = btcutil.AppDataDir("btcwallet", false)
+	walletDataDirectory = luxutil.AppDataDir("btcwallet", false)
 	newlineBytes        = []byte{'\n'}
 )
 
@@ -140,12 +140,12 @@ func (noInputValue) Error() string { return "no input value" }
 // looked up again by the wallet during the call to signrawtransaction.
 func makeInputSource(outputs []btcjson.ListUnspentResult) txauthor.InputSource {
 	var (
-		totalInputValue btcutil.Amount
+		totalInputValue luxutil.Amount
 		inputs          = make([]*wire.TxIn, 0, len(outputs))
 		sourceErr       error
 	)
 	for _, output := range outputs {
-		outputAmount, err := btcutil.NewAmount(output.Amount)
+		outputAmount, err := luxutil.NewAmount(output.Amount)
 		if err != nil {
 			sourceErr = fmt.Errorf(
 				"invalid amount `%v` in listunspent result",
@@ -178,7 +178,7 @@ func makeInputSource(outputs []btcjson.ListUnspentResult) txauthor.InputSource {
 		sourceErr = noInputValue{}
 	}
 
-	return func(btcutil.Amount) (btcutil.Amount, []*wire.TxIn, [][]byte, error) {
+	return func(luxutil.Amount) (luxutil.Amount, []*wire.TxIn, [][]byte, error) {
 		return totalInputValue, inputs, nil, sourceErr
 	}
 }
@@ -257,7 +257,7 @@ func sweep() error {
 		}
 	}
 
-	var totalSwept btcutil.Amount
+	var totalSwept luxutil.Amount
 	var numErrors int
 	var reportError = func(format string, args ...interface{}) {
 		fmt.Fprintf(os.Stderr, format, args...)
@@ -300,7 +300,7 @@ func sweep() error {
 			continue
 		}
 
-		outputAmount := btcutil.Amount(tx.Tx.TxOut[0].Value)
+		outputAmount := luxutil.Amount(tx.Tx.TxOut[0].Value)
 		fmt.Printf("Swept %v to destination account with transaction %v\n",
 			outputAmount, txHash)
 		totalSwept += outputAmount
@@ -330,8 +330,8 @@ func promptSecret(what string) (string, error) {
 	return string(input), nil
 }
 
-func saneOutputValue(amount btcutil.Amount) bool {
-	return amount >= 0 && amount <= btcutil.MaxSatoshi
+func saneOutputValue(amount luxutil.Amount) bool {
+	return amount >= 0 && amount <= luxutil.MaxSatoshi
 }
 
 func parseOutPoint(input *btcjson.ListUnspentResult) (wire.OutPoint, error) {

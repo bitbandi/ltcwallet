@@ -8,11 +8,11 @@
 // Full documentation of the API implemented by this package is maintained in a
 // language-agnostic document:
 //
-//   https://github.com/roasbeef/btcwallet/blob/master/rpc/documentation/api.md
+//   https://github.com/bitbandi/luxwallet/blob/master/rpc/documentation/api.md
 //
 // Any API changes must be performed according to the steps listed here:
 //
-//   https://github.com/roasbeef/btcwallet/blob/master/rpc/documentation/serverchanges.md
+//   https://github.com/bitbandi/luxwallet/blob/master/rpc/documentation/serverchanges.md
 package rpcserver
 
 import (
@@ -25,20 +25,20 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 
-	"github.com/roasbeef/btcd/chaincfg/chainhash"
-	"github.com/roasbeef/btcd/txscript"
-	"github.com/roasbeef/btcd/wire"
-	"github.com/roasbeef/btcrpcclient"
-	"github.com/roasbeef/btcutil"
-	"github.com/roasbeef/btcutil/hdkeychain"
-	"github.com/roasbeef/btcwallet/chain"
-	"github.com/roasbeef/btcwallet/internal/cfgutil"
-	"github.com/roasbeef/btcwallet/internal/zero"
-	"github.com/roasbeef/btcwallet/netparams"
-	pb "github.com/roasbeef/btcwallet/rpc/walletrpc"
-	"github.com/roasbeef/btcwallet/waddrmgr"
-	"github.com/roasbeef/btcwallet/wallet"
-	"github.com/roasbeef/btcwallet/walletdb"
+	"github.com/bitbandi/luxd/chaincfg/chainhash"
+	"github.com/bitbandi/luxd/txscript"
+	"github.com/bitbandi/luxd/wire"
+	"github.com/bitbandi/luxrpcclient"
+	"github.com/bitbandi/luxutil"
+	"github.com/bitbandi/luxutil/hdkeychain"
+	"github.com/bitbandi/luxwallet/chain"
+	"github.com/bitbandi/luxwallet/internal/cfgutil"
+	"github.com/bitbandi/luxwallet/internal/zero"
+	"github.com/bitbandi/luxwallet/netparams"
+	pb "github.com/bitbandi/luxwallet/rpc/walletrpc"
+	"github.com/bitbandi/luxwallet/waddrmgr"
+	"github.com/bitbandi/luxwallet/wallet"
+	"github.com/bitbandi/luxwallet/walletdb"
 )
 
 // Public API version constants
@@ -226,7 +226,7 @@ func (s *walletServer) NextAddress(ctx context.Context, req *pb.NextAddressReque
 	*pb.NextAddressResponse, error) {
 
 	var (
-		addr btcutil.Address
+		addr luxutil.Address
 		err  error
 	)
 	switch req.Kind {
@@ -249,7 +249,7 @@ func (s *walletServer) ImportPrivateKey(ctx context.Context, req *pb.ImportPriva
 
 	defer zero.Bytes(req.Passphrase)
 
-	wif, err := btcutil.DecodeWIF(req.PrivateKeyWif)
+	wif, err := luxutil.DecodeWIF(req.PrivateKeyWif)
 	if err != nil {
 		return nil, grpc.Errorf(codes.InvalidArgument,
 			"Invalid WIF-encoded private key: %v", err)
@@ -330,7 +330,7 @@ func (s *walletServer) FundTransaction(ctx context.Context, req *pb.FundTransact
 	}
 
 	selectedOutputs := make([]*pb.FundTransactionResponse_PreviousOutput, 0, len(unspentOutputs))
-	var totalAmount btcutil.Amount
+	var totalAmount luxutil.Amount
 	for _, output := range unspentOutputs {
 		selectedOutputs = append(selectedOutputs, &pb.FundTransactionResponse_PreviousOutput{
 			TransactionHash: output.OutPoint.Hash[:],
@@ -340,15 +340,15 @@ func (s *walletServer) FundTransaction(ctx context.Context, req *pb.FundTransact
 			ReceiveTime:     output.ReceiveTime.Unix(),
 			FromCoinbase:    output.OutputKind == wallet.OutputKindCoinbase,
 		})
-		totalAmount += btcutil.Amount(output.Output.Value)
+		totalAmount += luxutil.Amount(output.Output.Value)
 
-		if req.TargetAmount != 0 && totalAmount > btcutil.Amount(req.TargetAmount) {
+		if req.TargetAmount != 0 && totalAmount > luxutil.Amount(req.TargetAmount) {
 			break
 		}
 	}
 
 	var changeScript []byte
-	if req.IncludeChangeScript && totalAmount > btcutil.Amount(req.TargetAmount) {
+	if req.IncludeChangeScript && totalAmount > luxutil.Amount(req.TargetAmount) {
 		changeAddr, err := s.wallet.NewChangeAddress(req.Account, waddrmgr.PubKeyHash)
 		if err != nil {
 			return nil, translateError(err)

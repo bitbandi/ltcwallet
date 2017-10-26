@@ -15,11 +15,11 @@ import (
 	"strings"
 
 	flags "github.com/jessevdk/go-flags"
-	"github.com/roasbeef/btcutil"
-	"github.com/roasbeef/btcwallet/internal/cfgutil"
-	"github.com/roasbeef/btcwallet/internal/legacy/keystore"
-	"github.com/roasbeef/btcwallet/netparams"
-	"github.com/roasbeef/btcwallet/wallet"
+	"github.com/bitbandi/luxutil"
+	"github.com/bitbandi/luxwallet/internal/cfgutil"
+	"github.com/bitbandi/luxwallet/internal/legacy/keystore"
+	"github.com/bitbandi/luxwallet/netparams"
+	"github.com/bitbandi/luxwallet/wallet"
 )
 
 const (
@@ -35,8 +35,8 @@ const (
 )
 
 var (
-	btcdDefaultCAFile  = filepath.Join(btcutil.AppDataDir("btcd", false), "rpc.cert")
-	defaultAppDataDir  = btcutil.AppDataDir("btcwallet", false)
+	btcdDefaultCAFile  = filepath.Join(luxutil.AppDataDir("btcd", false), "rpc.cert")
+	defaultAppDataDir  = luxutil.AppDataDir("btcwallet", false)
 	defaultConfigFile  = filepath.Join(defaultAppDataDir, defaultConfigFilename)
 	defaultRPCKeyFile  = filepath.Join(defaultAppDataDir, "rpc.key")
 	defaultRPCCertFile = filepath.Join(defaultAppDataDir, "rpc.cert")

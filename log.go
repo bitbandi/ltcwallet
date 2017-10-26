@@ -9,12 +9,12 @@ import (
 	"os"
 
 	"github.com/btcsuite/btclog"
-	"github.com/roasbeef/btcrpcclient"
-	"github.com/roasbeef/btcwallet/chain"
-	"github.com/roasbeef/btcwallet/rpc/legacyrpc"
-	"github.com/roasbeef/btcwallet/rpc/rpcserver"
-	"github.com/roasbeef/btcwallet/wallet"
-	"github.com/roasbeef/btcwallet/wtxmgr"
+	"github.com/bitbandi/luxrpcclient"
+	"github.com/bitbandi/luxwallet/chain"
+	"github.com/bitbandi/luxwallet/rpc/legacyrpc"
+	"github.com/bitbandi/luxwallet/rpc/rpcserver"
+	"github.com/bitbandi/luxwallet/wallet"
+	"github.com/bitbandi/luxwallet/wtxmgr"
 	"github.com/btcsuite/seelog"
 )
 

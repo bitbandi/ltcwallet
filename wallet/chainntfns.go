@@ -5,11 +5,11 @@
 package wallet
 
 import (
-	"github.com/roasbeef/btcd/txscript"
-	"github.com/roasbeef/btcwallet/chain"
-	"github.com/roasbeef/btcwallet/waddrmgr"
-	"github.com/roasbeef/btcwallet/walletdb"
-	"github.com/roasbeef/btcwallet/wtxmgr"
+	"github.com/bitbandi/luxd/txscript"
+	"github.com/bitbandi/luxwallet/chain"
+	"github.com/bitbandi/luxwallet/waddrmgr"
+	"github.com/bitbandi/luxwallet/walletdb"
+	"github.com/bitbandi/luxwallet/wtxmgr"
 )
 
 func (w *Wallet) handleChainNotifications() {

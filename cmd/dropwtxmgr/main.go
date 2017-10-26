@@ -11,14 +11,14 @@ import (
 	"path/filepath"
 
 	"github.com/jessevdk/go-flags"
-	"github.com/roasbeef/btcutil"
-	"github.com/roasbeef/btcwallet/walletdb"
-	_ "github.com/roasbeef/btcwallet/walletdb/bdb"
+	"github.com/bitbandi/luxutil"
+	"github.com/bitbandi/luxwallet/walletdb"
+	_ "github.com/bitbandi/luxwallet/walletdb/bdb"
 )
 
 const defaultNet = "mainnet"
 
-var datadir = btcutil.AppDataDir("btcwallet", false)
+var datadir = luxutil.AppDataDir("btcwallet", false)
 
 // Flags.
 var opts = struct {

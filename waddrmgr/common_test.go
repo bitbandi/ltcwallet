@@ -11,10 +11,10 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/roasbeef/btcd/chaincfg"
-	"github.com/roasbeef/btcwallet/waddrmgr"
-	"github.com/roasbeef/btcwallet/walletdb"
-	_ "github.com/roasbeef/btcwallet/walletdb/bdb"
+	"github.com/bitbandi/luxd/chaincfg"
+	"github.com/bitbandi/luxwallet/waddrmgr"
+	"github.com/bitbandi/luxwallet/walletdb"
+	_ "github.com/bitbandi/luxwallet/walletdb/bdb"
 )
 
 var (

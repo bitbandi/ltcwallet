@@ -12,10 +12,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/roasbeef/btcd/chaincfg"
-	"github.com/roasbeef/btcd/chaincfg/chainhash"
-	"github.com/roasbeef/btcutil/hdkeychain"
-	"github.com/roasbeef/btcwallet/walletdb"
+	"github.com/bitbandi/luxd/chaincfg"
+	"github.com/bitbandi/luxd/chaincfg/chainhash"
+	"github.com/bitbandi/luxutil/hdkeychain"
+	"github.com/bitbandi/luxwallet/walletdb"
 )
 
 const (

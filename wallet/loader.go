@@ -10,10 +10,10 @@ import (
 	"path/filepath"
 	"sync"
 
-	"github.com/roasbeef/btcd/chaincfg"
-	"github.com/roasbeef/btcwallet/internal/prompt"
-	"github.com/roasbeef/btcwallet/waddrmgr"
-	"github.com/roasbeef/btcwallet/walletdb"
+	"github.com/bitbandi/luxd/chaincfg"
+	"github.com/bitbandi/luxwallet/internal/prompt"
+	"github.com/bitbandi/luxwallet/waddrmgr"
+	"github.com/bitbandi/luxwallet/walletdb"
 )
 
 const (

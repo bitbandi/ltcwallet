@@ -5,10 +5,10 @@
 package votingpool
 
 import (
-	"github.com/roasbeef/btcd/wire"
-	"github.com/roasbeef/btcutil/hdkeychain"
-	"github.com/roasbeef/btcwallet/waddrmgr"
-	"github.com/roasbeef/btcwallet/walletdb"
+	"github.com/bitbandi/luxd/wire"
+	"github.com/bitbandi/luxutil/hdkeychain"
+	"github.com/bitbandi/luxwallet/waddrmgr"
+	"github.com/bitbandi/luxwallet/walletdb"
 )
 
 var TstLastErr = lastErr
